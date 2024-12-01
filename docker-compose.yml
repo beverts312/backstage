@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  backstage:
+    image: backstage
+    ports:
+      - 3000:3000
+    env_file:
+      - app.env
+      - pg.env
+    environment:
+      - POSTGRES_HOST=db
+    links:
+      - "postgres:db"
+  postgres:
+    image: postgres:13
+    env_file:
+      - pg.env
+    volumes:
+      - ../bs-postgres:/var/lib/postgresql/data
