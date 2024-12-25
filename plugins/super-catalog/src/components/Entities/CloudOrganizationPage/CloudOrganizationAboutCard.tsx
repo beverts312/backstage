@@ -4,7 +4,7 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import { useEntity } from '@backstage/plugin-catalog-react';
 import { AboutField } from '@backstage/plugin-catalog';
-import { CloudOrganizationV1alph1 } from '../../../../../super-catalog-common/src';
+import { CloudOrganization } from '@internal/backstage-plugin-super-catalog-common';
 
 const CardTitle = (props: { title: string }) => (
   <Box display="flex" alignItems="center">
@@ -15,7 +15,7 @@ const CardTitle = (props: { title: string }) => (
 const CloudOrganizationDetails = ({
   entity,
 }: {
-  entity: CloudOrganizationV1alph1;
+  entity: CloudOrganization;
 }) => {
   const {
     metadata: { name, description },
@@ -37,7 +37,7 @@ const CloudOrganizationDetails = ({
 };
 
 export const CloudOrganizationAboutCard = () => {
-  const entity = useEntity().entity as unknown as CloudOrganizationV1alph1;
+  const entity = useEntity().entity as unknown as CloudOrganization;
   return (
     <ErrorBoundary>
       <CloudOrganizationDetails entity={entity} />

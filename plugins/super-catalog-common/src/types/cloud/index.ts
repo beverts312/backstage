@@ -1,7 +1,7 @@
 export type { CloudAccount } from './CloudAccount';
-export type { CloudOrganizationV1alph1 } from './CloudOrganization';
-export type { CloudResourceEntityV1alph1 } from './CloudResource';
-export type { CloudServiceV1alph1 } from './CloudService';
+export type { CloudOrganization } from './CloudOrganization';
+export type { CloudResourceEntity } from './CloudResource';
+export type { CloudService } from './CloudService';
 export { CSP } from './csp';
 
 export const CLOUD_ORGANIZATION_TYPE: string = 'cloud-organization';
