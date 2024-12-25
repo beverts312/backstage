@@ -1,7 +1,6 @@
 app:
   title: B4llz Dev Portal
   baseUrl: ${BASE_URL}
-
 organization:
   name: B4llz Corp
 
@@ -35,7 +34,13 @@ techdocs:
 
 auth:
   providers:
-    guest: {}
+    github:
+      development:
+        clientId: ${AUTH_GITHUB_CLIENT_ID}
+        clientSecret: ${AUTH_GITHUB_CLIENT_SECRET}
+        signIn:
+          resolvers:
+            - resolver: usernameMatchingUserEntityName
 
 permission:
   enabled: true
