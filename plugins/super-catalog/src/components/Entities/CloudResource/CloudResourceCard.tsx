@@ -4,7 +4,7 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import { useEntity } from '@backstage/plugin-catalog-react';
 import { AboutField } from '@backstage/plugin-catalog';
-import { CloudOrganization } from '@internal/backstage-plugin-super-catalog-common';
+import { CloudResourceEntity } from '@internal/backstage-plugin-super-catalog-common';
 
 const CardTitle = (props: { title: string }) => (
   <Box display="flex" alignItems="center">
@@ -12,14 +12,10 @@ const CardTitle = (props: { title: string }) => (
   </Box>
 );
 
-const CloudOrganizationDetails = ({
-  entity,
-}: {
-  entity: CloudOrganization;
-}) => {
+const CloudResourceDetails = ({ entity }: { entity: CloudResourceEntity }) => {
   const {
     metadata: { name, description },
-    spec: { csp, vendor },
+    spec: { region },
   } = entity;
 
   return (
@@ -27,8 +23,7 @@ const CloudOrganizationDetails = ({
       <Grid container spacing={3}>
         <Grid item xs={8}>
           <Grid container justifyContent="space-between">
-            <AboutField label="CSP" value={csp} />
-            <AboutField label="Vendor" value={vendor} />
+            <AboutField label="Region" value={region} />
           </Grid>
         </Grid>
       </Grid>
@@ -36,11 +31,11 @@ const CloudOrganizationDetails = ({
   );
 };
 
-export const CloudOrganizationAboutCard = () => {
-  const entity = useEntity().entity as unknown as CloudOrganization;
+export const CloudResourceCard = () => {
+  const entity = useEntity().entity as unknown as CloudResourceEntity;
   return (
     <ErrorBoundary>
-      <CloudOrganizationDetails entity={entity} />
+      <CloudResourceDetails entity={entity} />
     </ErrorBoundary>
   );
 };

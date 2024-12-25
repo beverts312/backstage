@@ -1,7 +1,7 @@
 import React from 'react';
 import { EntityLayout } from '@backstage/plugin-catalog';
 import { Grid } from '@material-ui/core';
-import { CloudOrganizationAboutCard } from './CloudOrganizationAboutCard';
+import { CloudOrganizationCard } from './CloudOrganizationCard';
 import { entityWarningContent } from '../entityWarningContent';
 
 export const cloudOrganizationPage = (
@@ -10,7 +10,7 @@ export const cloudOrganizationPage = (
       <Grid container spacing={3}>
         {entityWarningContent}
         <Grid item md={6}>
-          <CloudOrganizationAboutCard />
+          <CloudOrganizationCard />
         </Grid>
       </Grid>
     </EntityLayout.Route>
