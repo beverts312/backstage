@@ -39,7 +39,6 @@ import { catalogEntityCreatePermission } from '@backstage/plugin-catalog-common/
 import { githubAuthApiRef } from '@backstage/core-plugin-api';
 import { SuperCatalogPage } from '@internal/backstage-plugin-super-catalog';
 
-
 const app = createApp({
   apis,
   bindRoutes({ bind }) {

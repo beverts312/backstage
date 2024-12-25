@@ -1,13 +1,13 @@
-import type { ComponentEntityV1alpha1  } from '@backstage/catalog-model';
+import type { ComponentEntityV1alpha1 } from '@backstage/catalog-model';
 
 export type SaaS = ComponentEntityV1alpha1 & {
   spec: {
-    cloudOrganization?: String;
-    cloudAccount?: String;
-    vendor: String;
-    appUrl?: String;
-    docsUrl?: String;
-    supportUrl?: String;
-    supportEmail?: String;
+    cloudOrganization?: string;
+    cloudAccount?: string;
+    vendor: string;
+    appUrl?: string;
+    docsUrl?: string;
+    supportUrl?: string;
+    supportEmail?: string;
   };
-}
+};

@@ -1,4 +1,4 @@
-import type { ResourceEntityV1alpha1  } from '@backstage/catalog-model';
+import type { ResourceEntityV1alpha1 } from '@backstage/catalog-model';
 import { CSP } from './csp';
 
 export type CloudServiceV1alph1 = ResourceEntityV1alpha1 & {
@@ -6,4 +6,4 @@ export type CloudServiceV1alph1 = ResourceEntityV1alpha1 & {
     docsUrl?: string;
     csp: CSP;
   };
-}
+};

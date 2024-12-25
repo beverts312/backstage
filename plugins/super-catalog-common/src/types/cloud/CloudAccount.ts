@@ -1,9 +1,9 @@
-import type { ResourceEntityV1alpha1  } from '@backstage/catalog-model';
+import type { ResourceEntityV1alpha1 } from '@backstage/catalog-model';
 
 export type CloudAccount = ResourceEntityV1alpha1 & {
   spec: {
-    cloudOrganization: String;
-    id?: String;
+    cloudOrganization: string;
+    id?: string;
     number?: Number;
   };
-}
+};
