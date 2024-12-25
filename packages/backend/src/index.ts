@@ -31,4 +31,9 @@ backend.add(import('@backstage/plugin-search-backend-module-techdocs'));
 
 backend.add(import('@backstage/plugin-kubernetes-backend'));
 
+backend.add(
+  import(
+    '@internal/backstage-plugin-scaffolder-backend-module-super-catalog-scaffolding'
+  ),
+);
 backend.start();
