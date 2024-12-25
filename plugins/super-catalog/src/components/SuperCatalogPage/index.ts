@@ -1,0 +1,1 @@
+export { SuperCatalogPage } from './SuperCatalogPage';
