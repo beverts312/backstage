@@ -58,6 +58,7 @@ import {
   EntityKubernetesContent,
   isKubernetesAvailable,
 } from '@backstage/plugin-kubernetes';
+import { superCatalogSwitch } from '@internal/backstage-plugin-super-catalog';
 
 const techdocsContent = (
   <EntityTechdocsContent>
@@ -400,6 +401,7 @@ const domainPage = (
 
 export const entityPage = (
   <EntitySwitch>
+    {superCatalogSwitch}
     <EntitySwitch.Case if={isKind('component')} children={componentPage} />
     <EntitySwitch.Case if={isKind('api')} children={apiPage} />
     <EntitySwitch.Case if={isKind('group')} children={groupPage} />

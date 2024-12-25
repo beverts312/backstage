@@ -3,10 +3,7 @@ import { SuperCatalogPage } from './SuperCatalogPage';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import { screen } from '@testing-library/react';
-import {
-  registerMswTestHooks,
-  renderInTestApp,
-} from '@backstage/test-utils';
+import { registerMswTestHooks, renderInTestApp } from '@backstage/test-utils';
 
 describe('SuperCatalogPage', () => {
   const server = setupServer();
@@ -22,8 +19,6 @@ describe('SuperCatalogPage', () => {
 
   it('should render', async () => {
     await renderInTestApp(<SuperCatalogPage />);
-    expect(
-      screen.getByText('Welcome to super-catalog!'),
-    ).toBeInTheDocument();
+    expect(screen.getByText('Welcome to super-catalog!')).toBeInTheDocument();
   });
 });
