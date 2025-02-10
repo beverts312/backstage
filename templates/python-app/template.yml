@@ -1,0 +1,124 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: python-app-template
+  title: Create a new Python App
+  description: Create a new Python app with a basic structure
+  tags: [python]
+spec:
+  owner: user:beverts312
+  type: app
+  parameters:
+    - title: Fill in some steps
+      required:
+        - name
+        - owner
+      properties:
+        name:
+          title: Name of the App 
+          type: string
+          description: App Name
+          ui:autofocus: true
+        repo_org:
+          title: Repository Organization
+          type: string
+          description: Organization of the repository
+          default: beverts312
+        owner:
+          title: Owner
+          type: string
+          description: Owner of the app
+          ui:field: OwnerPicker
+          ui:options:
+            allowedKinds:
+              - User
+        description:
+          title: Description of the App
+          type: string
+          description: App Description
+        app_type:
+          title: App Type
+          type: string
+          description: Type of the app
+          enum:
+            - web-service
+            - cli
+            - library
+          default: web-service
+          ui:widget: select
+          ui:options:
+            format: radio
+        lifecycle:
+          title: Lifecycle
+          type: string
+          description: Lifecycle of the app
+          enum:
+            - experimental
+            - production
+            - deprecated
+          default: experimental
+          ui:widget: select
+          ui:options:
+            format: radio
+        has_postgres:
+          title: Include Postgres
+          type: boolean
+          description: Include a Postgres database
+          default: false
+  steps:
+    - id: fetch-base
+      name: Apply the base python template
+      action: fetch:template
+      input:
+        url: ./base
+        values:
+          name: ${{ parameters.name }}
+          owner: ${{ parameters.owner }}
+          description: ${{ parameters.description }}
+          lifecycle: ${{ parameters.lifecycle }}
+          app_type: ${{ parameters.app_type }}
+          repo_org: ${{ parameters.repo_org }}
+          has_postgres: ${{ parameters.has_postgres }}
+          is_web_service: ${{ parameters.app_type === 'web-service' }}
+    
+    - id: fetch-src-base
+      name: Apply the base src python template
+      action: fetch:template
+      input:
+        url: ./src_base
+        targetPath: ./${{ parameters.name }}
+
+    - id: fetch-web-service
+      if: ${{ parameters.app_type === 'web-service' }}
+      name: Apply web service template
+      action: fetch:template
+      input:
+        url: ./api_src_base
+        targetPath: ./${{ parameters.name }}
+        values:
+          name: ${{ parameters.name }}
+          description: ${{ parameters.description }}
+
+    - id: publish
+      name: Publish
+      action: publish:github
+      input:
+        allowedHosts: ["github.com"]
+        description: ${{ parameters.description }}
+        repoUrl: github.com?repo=${{ parameters.name }}&owner=${{ parameters.repo_org }}
+        defaultBranch: main
+
+    - id: register
+      name: Register
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
+        catalogInfoPath: "/catalog-info.yml"
+
+  output:
+    links:
+      - title: Repository
+        url: ${{ steps.publish.output.remoteUrl }}
+      - title: Open in catalog
+        icon: catalog
+        entityRef: ${{ steps.register.output.entityRef }}

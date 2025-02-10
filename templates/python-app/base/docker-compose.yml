@@ -1,0 +1,20 @@
+version: "3.1"
+services:
+  app:
+    build: .
+{% if values.is_web_service %}
+    ports:
+      - "8000:8000"
+{% endif %}
+    env_file:
+      - .env
+{% if values.has_postgres %}    
+    links:
+      - "db:db"
+  db:
+    image: postgres:16
+    env_file:
+      - .env
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+{% endif %}
