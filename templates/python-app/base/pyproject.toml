@@ -1,0 +1,29 @@
+[project]
+name = "${{values.name}}"
+dynamic = ["dependencies", "version"]
+
+[build-system]
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["${{values.name}}*"]
+namespaces = false
+
+[tool.setuptools.dynamic]
+version = {attr = "${{values.name}}.__version__"}
+dependencies = {file = ["requirements.txt"]}
+
+[tool.iosort]
+src_paths = ["${{values.name}}"]
+profile = "black"
+
+[tool.pytest.ini_options]
+addopts = "--cov=${{values.name}} --cov-report=term --cov-report=html --cov-report=xml --cov-fail-under=95"
+
+{% if values.is_web_service %}
+[tool.coverage.run]
+omit = [
+  "${{values.name}}/web_service.py"
+]
+{% endif %}

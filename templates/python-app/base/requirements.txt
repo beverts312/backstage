@@ -1,0 +1,9 @@
+{% if values.has_postgres %}
+SQLAlchemy==2.0.38
+psycopg2-binary==2.9.10
+{% endif %}
+{% if values.is_web_service %}
+uvicorn[standard]==0.34.0
+strawberry-graphql[asgi]==0.258.0
+fastapi[standard]==0.115.6
+{% endif %}
