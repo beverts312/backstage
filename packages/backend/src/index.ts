@@ -32,4 +32,9 @@ backend.add(import('@backstage/plugin-search-backend-module-techdocs'));
 backend.add(import('@backstage/plugin-kubernetes-backend'));
 
 backend.add(import('@backstage/plugin-scaffolder-backend-module-github'));
+backend.add(
+  import(
+    '@internal/backstage-plugin-scaffolder-backend-module-b4llz-scaffold-utils'
+  ),
+);
 backend.start();
